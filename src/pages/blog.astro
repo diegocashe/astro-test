@@ -1,0 +1,55 @@
+---
+import BlogItem from "../components/BlogItem.astro";
+import Layout from "../layouts/Layout.astro";
+
+const allPosts = await Astro.glob("./posts/*.md");
+---
+
+<Layout
+  title="Diego Castillo | Programador Web y Desarrollador Full Stack"
+  description="Soy Diego, ingeniero de sistemas con 5 años de experiencia en desarrollo web y aplicaciones. Explora mi portafolio y blog para aprender sobre programación y tecnología."
+>
+  <main class="container">
+    <h1>My Astro Learning Blog</h1>
+    <p>This is where I will post about my journey learning Astro.</p>
+    <div class="blog-items-container">
+      {
+        allPosts.map((post) => (
+          <div>
+            <BlogItem url={post.url || "#"} title={post.frontmatter.title} />
+          </div>
+        ))
+      }
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Diseño para móviles (pantallas pequeñas) */
+  .blog-items-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .blog-items-container > * {
+    flex: 1 1 100%;
+  }
+
+  @media (min-width: 425px) {
+    .blog-items-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .blog-items-container > * {
+      flex: 0 1 calc((100% / 2) - var(--spacing-xs));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .blog-items-container > * {
+      flex: 0 1 calc((100% / 3) - (var(--spacing-xs) * 2 / 3));
+    }
+  }
+</style>

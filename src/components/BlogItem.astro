@@ -1,0 +1,20 @@
+---
+interface Props {
+  url: string;
+  title: string;
+}
+
+const { url, title } = Astro.props;
+---
+
+  <a class="blog-item btn" href={url}>
+    {title}
+  </a>
+
+<style>
+.blog-item {
+  display: block;
+  padding: var(--spacing);
+  height: 100%;
+}
+</style>

@@ -1,50 +1,54 @@
 ---
+import '../styles/global.css';
+import Footer from "../components/Footer.astro";
+import Navigation from "../components/Navigation.astro";
+import { ViewTransitions } from 'astro:transitions';
+
 interface Props {
 	title: string;
+	description: string;
+	lang?: string;
+	viewport?: string;
+	generator?: string;
+	favicon?: string;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description,
+	lang = "en",
+	viewport = "width=device-width, initial-scale=1.0",
+	generator = "Astro",
+	favicon = "/favicon.svg",
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="viewport" content={viewport} />
+		<link rel="icon" type="image/svg+xml" href={favicon} />
+		<meta name="generator" content={generator} />
 		<title>{title}</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+			rel="stylesheet"
+		/>
+		<ViewTransitions />
 	</head>
 	<body>
+		<Navigation />
 		<slot />
+		<Footer />
+
+		<script>
+			import "../scripts/hamburguer-menu.ts";
+		</script>
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>
+

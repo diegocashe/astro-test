@@ -1,0 +1,86 @@
+---
+import type { MarkdownInstance } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import BlogItem from "@components/BlogItem.astro";
+
+// Define el tipo para las rutas y propiedades devueltas
+interface Post {
+  url: string;
+  frontmatter: {
+    title: string;
+  };
+}
+
+export const getStaticPaths = async () => {
+  const allPosts: MarkdownInstance<Record<string, any>>[] =
+    await Astro.glob("../posts/*.md");
+
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.frontmatter.tags?.includes(tag),
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+};
+
+interface Props {
+  posts: MarkdownInstance<Record<string, any>>[];
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<Layout
+  title={tag}
+  description="Soy Diego, ingeniero de sistemas con 5 años de experiencia en desarrollo web y aplicaciones. Explora mi portafolio y blog para aprender sobre programación y tecnología."
+>
+  <p>Posts tagged with {tag}</p>
+
+  <div class="blog-items-container">
+    {
+      posts.map((post) => (
+        <div>
+          <BlogItem url={post.url || "#"} title={post.frontmatter.title} />
+        </div>
+      ))
+    }
+  </div>
+</Layout>
+
+<style>
+  /* Diseño para móviles (pantallas pequeñas) */
+  .blog-items-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .blog-items-container > * {
+    flex: 1 1 100%;
+  }
+
+  @media (min-width: 425px) {
+    .blog-items-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .blog-items-container > * {
+      flex: 0 1 calc((100% / 2) - var(--spacing-xs));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .blog-items-container > * {
+      flex: 0 1 calc((100% / 3) - (var(--spacing-xs) * 2 / 3));
+    }
+  }
+</style>

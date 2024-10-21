@@ -1,0 +1,264 @@
+:root {
+  /* Spacing */
+  --spacing-xxs: 0.25rem;
+  --spacing-xs: 0.75rem;
+  --spacing: 1rem;
+  --spacing-md: 1.6rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 2.3rem;
+
+  /* Radius */
+
+  --radius-xxs: 5px;
+  --radius-xs: 7px;
+  --radius: 15px;
+  --radius-md: 25px;
+  --radius-lg: 35px;
+  --radius-xl: 50px;
+
+  /* Containers */
+  --mw-container: 1080px;
+
+  /* transitions */
+  --transition-regular: 0.25s cubic-bezier(.54, .19, .42, 1.24);
+
+  /* Colors */
+  --paper: #f7f4ea;
+  --text: #0e0e0e;
+
+  /* Borders */
+  --paper-border: 1px solid #e7e7e765;
+
+  --screen-xxs: 375px --screen-xs: 425px --screen-sm: 720px --screen-md: 1024px --screen-lg: 1440px --screen-xxl: 2560px
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--paper);
+
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  line-height: 1.5;
+}
+
+/* Tamaños de fuente para pantallas grandes */
+h1 {
+  margin: 1rem 0;
+  font-size: 2.5rem;
+  /* 40px */
+}
+
+h2 {
+  margin: 1rem 0;
+  font-size: 2rem;
+  /* 32px */
+}
+
+h3 {
+  margin: 1rem 0;
+  font-size: 1.75rem;
+  /* 28px */
+}
+
+h4 {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  /* 24px */
+}
+
+h5 {
+  margin: 1rem 0;
+  font-size: 1.25rem;
+  /* 20px */
+}
+
+h6 {
+  margin: 1rem 0;
+  font-size: 1rem;
+  /* 16px */
+}
+
+p,
+span,
+li,
+a {
+  font-size: 1rem;
+  /* 16px */
+}
+
+a,
+a:active,
+a:visited,
+a:focus {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--text)
+}
+
+/* Estilos responsivos para pantallas menores de 720px */
+@media (width > 768px) {
+  h1 {
+    font-size: 2rem;
+    /* 32px */
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    /* 28px */
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    /* 24px */
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    /* 20px */
+  }
+
+  h5 {
+    font-size: 1.125rem;
+    /* 18px */
+  }
+
+  h6 {
+    font-size: 1rem;
+    /* 16px */
+  }
+
+  p,
+  span,
+  li,
+  a {
+    font-size: 0.875rem;
+    /* 14px */
+  }
+}
+
+
+
+
+.elevate {
+  background: #f7f4ea;
+  box-shadow: 7px 7px 14px #d2cfc7,
+    -7px -7px 14px #ffffff;
+}
+
+.elevate-2 {
+  border-radius: 50px;
+  background: #f7f4ea;
+  box-shadow: 17px 17px 34px #d2cfc7,
+    -17px -17px 34px #ffffff;
+}
+
+.elevate-3 {
+  background: #f7f4ea;
+  box-shadow: 27px 27px 54px #d2cfc7,
+    -27px -27px 54px #ffffff;
+}
+
+.elevate-4 {
+  background: #f7f4ea;
+  box-shadow: 37px 37px 74px #d2cfc7,
+    -37px -37px 74px #ffffff;
+}
+
+.elevate-5 {
+  background: #f7f4ea;
+  box-shadow: 47px 47px 94px #d2cfc7,
+    -47px -47px 94px #ffffff;
+}
+
+.btn {
+  cursor: pointer;
+  border-radius: var(--radius-xs);
+  border: var(--paper-border);
+  transition: .2s ease-in-out;
+  background: #f7f4ea;
+  box-shadow: 27px 27px 54px #d2cfc7,
+    -27px -27px 54px #ffffff;
+}
+
+.btn:hover {
+  background: #f7f4ea;
+  box-shadow: 5px 5px 10px #d2cfc7,
+    -5px -5px 10px #ffffff;
+}
+
+.btn:active {
+  background: #f7f4ea;
+  box-shadow: inset 5px 5px 10px #d2cfc7,
+    inset -5px -5px 10px #ffffff;
+}
+
+@keyframes elevation-btn {
+  0% {
+    background-color: #f7f4ea;
+    box-shadow: 27px 27px 54px #d2cfc7, -27px -27px 54px #ffffff;
+  }
+
+  50% {
+    background-color: #f7f4ea;
+    box-shadow: 5px 5px 10px #d2cfc7, -5px -5px 10px #ffffff;
+  }
+
+  0% {
+    background-color: #f7f4ea;
+    box-shadow: 27px 27px 54px #d2cfc7, -27px -27px 54px #ffffff;
+  }
+}
+
+@media (width < 525px) {
+  .btn {
+    animation: elevation-btn infinite;
+    animation-duration: 2s;
+  }
+
+  .btn:nth-child(odd) {
+    animation-duration: 3s;
+  }
+
+  .btn:hover {
+    animation: none;
+  }
+
+  .btn:active {
+    animation: none;
+  }
+}
+
+.container {
+  padding-left: var(--spacing);
+  padding-right: var(--spacing);
+  max-width: 1080px;
+  margin: auto;
+}
+
+@media (width < 525px) {
+  .container {
+    padding-left: var(--spacing-xs);
+    padding-right: var(--spacing-xs);
+    max-width: 1;
+  }
+}
+
+html.dark {
+  background-color: #0d0950;
+  color: #fff;
+}
+
+.dark .nav-links a {
+  color: #fff;
+}

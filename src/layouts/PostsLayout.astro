@@ -1,0 +1,19 @@
+---
+import { fade } from "astro:transitions";
+import Layout from "./Layout.astro";
+
+interface Props {
+	frontmatter: {
+    title: string;
+    author: string;
+  }
+}
+
+
+const { frontmatter } = Astro.props;
+---
+<Layout title={frontmatter.title} description={frontmatter.title}>
+  <h1 transition:animate={fade({ duration: '2s' })}>{frontmatter.title}</h1>
+  <p transition:animate="slide" >Escrito por {frontmatter.author}</p>
+  <slot />
+</Layout>
