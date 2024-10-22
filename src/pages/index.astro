@@ -1,14 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Greeting from '../components/DynamicComponents/Greeting';
 ---
 
 <Layout
 	title="Diego Castillo | Programador Web y Desarrollador Full Stack"
 	description="Soy Diego, ingeniero de sistemas con 5 años de experiencia en desarrollo web y aplicaciones. Explora mi portafolio y blog para aprender sobre programación y tecnología."
 >
-	<main>
-		<Greeting client:load messages={["Hola", "Qué tal", "Hola a todos"]}/>
+	<main class="container">
 		<h1>Hola, Soy Diego Castillo, Desarrollador Web</h1>
 
 		<h2>
@@ -46,15 +44,3 @@ import Greeting from '../components/DynamicComponents/Greeting';
 		</ul>
 	</main>
 </Layout>
-
-<style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: #111111;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-</style>

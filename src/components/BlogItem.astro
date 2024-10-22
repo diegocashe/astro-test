@@ -7,14 +7,33 @@ interface Props {
 const { url, title } = Astro.props;
 ---
 
-  <a class="blog-item btn" href={url}>
-    {title}
-  </a>
+<a class="blog-item" href={url}>
+  {title}
+</a>
 
 <style>
-.blog-item {
-  display: block;
-  padding: var(--spacing);
-  height: 100%;
-}
+  .blog-item {
+    display: block;
+    padding: var(--spacing);
+    height: 100%;
+    border-radius: 15px;
+    outline: 1px solid rgb(207 207 207 / 70%);
+    outline-offset: 2px;
+    transition: all 0.25s ease;
+  }
+  .blog-item:hover,
+  .blog-item:focus {
+    outline: 0px solid rgba(131, 131, 131, 0);
+    background: var(--paper);
+    box-shadow:
+      7px 7px 14px var(--first-shadow-color),
+      -7px -7px 14px var(--second-shadow-color);
+  }
+  .blog-item:active {
+    outline: 0px solid rgba(131, 131, 131, 0);
+    background: var(--paper);
+    box-shadow:
+      inset 5px 5px 10px var(--first-shadow-color),
+      inset -5px -5px 10px var(--second-shadow-color);
+  }
 </style>

@@ -51,16 +51,17 @@ const links = [
       {
         links.map((item) => (
           <li class="nav-item">
-            <a class="btn" href={item.href} >
+            <a class="btn" href={item.href} data-route={item.href} data-astro-prefetch>
               {item.name}
             </a>
           </li>
         ))
       }
-      <li class="nav-item">
-        <ThemeIcon />
-      </li>
     </ul>
+
+    <div class="change-theme-container">
+      <ThemeIcon />
+    </div>
 
     <div class="hamburguer btn">
       <span></span>
@@ -112,7 +113,7 @@ const links = [
       {
         links.map((item) => (
           <li class="side-nav-item">
-            <a class="btn" href={item.href}>
+            <a class="btn" href={item.href} data-route={item.href} data-astro-prefetch>
               {item.name}
             </a>
           </li>
@@ -141,7 +142,7 @@ const links = [
     justify-content: space-between;
     max-width: var(--mw-container);
     margin: auto;
-    padding: var(--spacing);
+    /* padding: var(--spacing); */
     border: 2px solid #e7e7e765;
     border-radius: var(--radius-lg);
     background-color: var(--paper);
@@ -182,29 +183,19 @@ const links = [
 
   .nav-item a {
     font-weight: 500;
-    color: #0e0e0e;
     text-decoration: none;
     position: relative;
     padding: var(--spacing-xs) var(--spacing);
   }
 
-  .nav-item a::before {
-    content: " ";
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    transform: scaleX(1);
-    transform-origin: left;
-    transition: transform var(--transition-regular);
-  }
-  .nav-item a.active::before {
-    transform: scaleX(1);
-  }
+  nav a.btn.active {
+  background: var(--paper);
+  box-shadow: inset 5px 5px 10px var(--first-shadow-color),
+    inset -5px -5px 10px var(--second-shadow-color);
+}
 
-  .nav-item a:hover::before {
-    transform: scaleX(1.025);
+  .change-theme-container {
+    margin-left: var(--spacing);
   }
 
   /* icono hamburguesa */
@@ -301,3 +292,20 @@ const links = [
     border-radius: var(--radius-lg);
   }
 </style>
+<script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    const allbtns = document.querySelectorAll("nav a.btn");
+    const actualRoute = new URL(window.location.href);
+
+    allbtns.forEach(($btn) => {
+      route = $btn.getAttribute("data-route");
+      if (route === actualRoute.pathname) {
+        $btn.classList.add("active");
+        return;
+      }
+      if ($btn.classList.contains("active")) {
+        $btn.classList.remove("active");
+      }
+    });
+  });
+</script>

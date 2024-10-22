@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const pageTitle = "About Me";
-
 const identity = {
   firstName: "Sarah",
   country: "Canada",
@@ -20,47 +18,48 @@ const skillColor = "navy";
 ---
 
 <Layout title="El about de astro" description="AStronauta">
-  <h1>About Developer Diego Castillo</h1>
-  <h2>Venezuelan Developer</h2>
-  <p>if you can</p>
+  <main class="container">
+    <h1>About Developer Diego Castillo</h1>
+    <h2>Venezuelan Developer</h2>
+    <p>if you can</p>
 
-  <p>Here are a few facts about me:</p>
-  <ul>
-    <li>My name is {identity.firstName}.</li>
-    <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
+    <p>Here are a few facts about me:</p>
+    <ul>
+      <li>My name is {identity.firstName}.</li>
+      <li>
+        I live in {identity.country} and I work as a {identity.occupation}.
+      </li>
+      {
+        identity.hobbies.length >= 2 && (
+          <li>
+            Two of my hobbies are: {identity.hobbies[0]} and{" "}
+            {identity.hobbies[1]}
+          </li>
+        )
+      }
+    </ul>
+    <p>My skills are:</p>
+    <ul>
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+
+    {happy && <p>I am happy to be learning Astro!</p>}
+
+    {finished && <p>I finished this tutorial!</p>}
+
     {
-      identity.hobbies.length >= 2 && (
-        <li>
-          Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}
-        </li>
+      goal === 3 ? (
+        <p>My goal is to finish in 3 days.</p>
+      ) : (
+        <p>My goal is not 3 days.</p>
       )
     }
-  </ul>
-  <p>My skills are:</p>
-  <ul>
-    {skills.map((skill) => <li class="skill">{skill}</li>)}
-  </ul>
-
-  {happy && <p>I am happy to be learning Astro!</p>}
-
-  {finished && <p>I finished this tutorial!</p>}
-
-  {
-    goal === 3 ? (
-      <p>My goal is to finish in 3 days.</p>
-    ) : (
-      <p>My goal is not 3 days.</p>
-    )
-  }
+  </main>
 </Layout>
 
-<style define:vars={{skillColor}}>
-  h1 {
-    color: purple;
-    font-size: 4rem;
-  }
+<style define:vars={{ skillColor }}>
   .skill {
-    color: var(--skillColor);
+    /* color: var(--skillColor); */
     font-weight: bold;
   }
 </style>

@@ -1,8 +1,11 @@
 ---
+import { getCollection } from "astro:content";
 import BlogItem from "../components/BlogItem.astro";
 import Layout from "../layouts/Layout.astro";
 
-const allPosts = await Astro.glob("./posts/*.md");
+const posts = (await getCollection('posts')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <Layout
@@ -14,9 +17,9 @@ const allPosts = await Astro.glob("./posts/*.md");
     <p>This is where I will post about my journey learning Astro.</p>
     <div class="blog-items-container">
       {
-        allPosts.map((post) => (
+        posts.map((post) => (
           <div>
-            <BlogItem url={post.url || "#"} title={post.frontmatter.title} />
+            <BlogItem url={`/posts/${post.slug}` || "#"} title={post.data.title} />
           </div>
         ))
       }

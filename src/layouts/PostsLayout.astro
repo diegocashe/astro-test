@@ -1,8 +1,9 @@
 ---
-import { fade } from "astro:transitions";
 import Layout from "./Layout.astro";
+import type { JsxElement } from "typescript";
 
 interface Props {
+  children: JsxElement | preact.Component | HTMLElement | any
 	frontmatter: {
     title: string;
     author: string;
@@ -13,7 +14,11 @@ interface Props {
 const { frontmatter } = Astro.props;
 ---
 <Layout title={frontmatter.title} description={frontmatter.title}>
-  <h1 transition:animate={fade({ duration: '2s' })}>{frontmatter.title}</h1>
-  <p transition:animate="slide" >Escrito por {frontmatter.author}</p>
-  <slot />
+  <main class="container">
+    <h1>{frontmatter.title}</h1>
+    <p>Escrito por {frontmatter.author}</p>
+    <div>
+      <slot />
+    </div>
+  </main>
 </Layout>

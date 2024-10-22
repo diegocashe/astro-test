@@ -1,19 +1,11 @@
 ---
-import type { MarkdownInstance } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import BlogItem from "@components/BlogItem.astro";
+import { getCollection } from "astro:content";
 
-// Define el tipo para las rutas y propiedades devueltas
-interface Post {
-  url: string;
-  frontmatter: {
-    title: string;
-  };
-}
-const allPosts: MarkdownInstance<Record<string, any>>[] =
-  await Astro.glob("../posts/*.md");
+const allPosts = (await getCollection("posts"));
 const uniqueTags = [
-  ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+  ...new Set(allPosts.map((post) => post.data.tags).flat()),
 ] as string[];
 ---
 
@@ -23,9 +15,9 @@ const uniqueTags = [
 >
   <div class="blog-items-container">
     {
-      uniqueTags.map((post) => (
+      uniqueTags.map((tag) => (
         <div>
-          <BlogItem url={`/tags/${post}`} title={post} />
+          <BlogItem url={`/tags/${tag}`} title={tag} />
         </div>
       ))
     }

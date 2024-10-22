@@ -1,12 +1,11 @@
 ---
-layout: ../../layouts/PostsLayout.astro
 title: 'La Inteligencia Artificial en el Ciclo de Vida del Desarrollo de Software'
 pubDate: 2024-10-06
 description: 'Exploramos cómo la inteligencia artificial impacta en las fases clave del ciclo de vida del desarrollo de software.'
 author: 'Diego Armando Castillo Hernández'
 image:
-    url: 'https://docs.astro.build/assets/ai-software-development.webp'
-    alt: 'Imagen representativa de inteligencia artificial y desarrollo de software.'
+    url: "https://docs.astro.build/assets/rays.webp"
+    alt: "The Astro logo on a dark background with rainbow rays."
 tags: ["inteligencia artificial", "desarrollo de software", "automatizacion", "gestion de proyectos"]
 ---
 

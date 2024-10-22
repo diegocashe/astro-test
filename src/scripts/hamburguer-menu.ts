@@ -35,7 +35,7 @@ document.addEventListener("astro:page-load", (_) => {
 
     observer.observe($sideMenu, { attributes: true, childList: false, subtree: false });
 
-    $hamburguer.addEventListener("mousedown", (event) => {
+    $hamburguer.addEventListener("mousedown", () => {
       $hamburguer.classList.toggle("open");
       $sideMenu.classList.toggle("open");
     })
