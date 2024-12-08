@@ -39,16 +39,29 @@ const {
 			href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
 			rel="stylesheet"
 		/>
+		<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 		<ViewTransitions />
 	</head>
-	<body>
-		<Navigation />
-		<slot />
-		<Footer />
-
+	<body class="content-body">
+		<div>
+			<Navigation />
+		</div>
+		<div>
+			<slot />
+		</div>
+		<div>
+			<Footer />
+		</div>
 		<script>
 			import "../scripts/hamburguer-menu.ts";
 		</script>
 	</body>
 </html>
+
+<style>
+.content-body {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+}
+</style>
 

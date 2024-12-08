@@ -13,7 +13,12 @@
       value="check"
     />
     <div class="indicator"></div>
-    <svg class="icon" width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <svg
+      class="icon"
+      width="30px"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
       <path
         class="sun"
         fill-rule="evenodd"
@@ -48,11 +53,25 @@
     border-radius: 15px;
     overflow: hidden;
     box-shadow:
-      -8px -4px 8px 0px  var(--second-shadow-color),
+      -8px -4px 8px 0px var(--second-shadow-color),
       8px 4px 12px 0px var(--first-shadow-color),
       4px 4px 4px 0px var(--first-shadow-color) inset,
-      -4px -4px 4px 0px  var(--second-shadow-color) inset;
+      -4px -4px 4px 0px var(--second-shadow-color) inset;
   }
+
+  /* .dark .toggle {
+    isolation: isolate;
+    position: relative;
+    height: 30px;
+    width: 60px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow:
+      -8px -4px 8px 0px rgb(50, 50, 50),
+      8px 4px 12px 0px #191919,
+      4px 4px 4px 0px #191919 inset,
+      -4px -4px 4px 0px #323232 inset;
+  } */
 
   .toggle-state {
     display: none;
@@ -73,11 +92,16 @@
       8px 4px 12px 0px var(--second-shadow-color);
   }
 
+  .dark .indicator {
+    box-shadow:
+      -8px -4px 8px 0px var(--first-shadow-color),
+      8px 4px 12px 0px var(--first-shadow-color);
+  }
+
   .toggle-state:checked ~ .indicator {
     transform: translate3d(25%, 0, 0);
   }
 
-  
   .toggle svg {
     display: block;
     position: absolute;
@@ -90,7 +114,7 @@
   .toggle-state:checked ~ svg {
     transform: translateX(-28px);
   }
-  
+
   .sun {
     transition: all var(--transition-regular);
     fill: black;

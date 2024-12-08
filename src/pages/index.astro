@@ -7,12 +7,29 @@ import Layout from "../layouts/Layout.astro";
 	description="Soy Diego, ingeniero de sistemas con 5 años de experiencia en desarrollo web y aplicaciones. Explora mi portafolio y blog para aprender sobre programación y tecnología."
 >
 	<main class="container">
-		<h1>Hola, Soy Diego Castillo, Desarrollador Web</h1>
+		<section class="hero-section">
+			<div class="title-container">
+				<h1>
+					Hola, Soy <span class="lobster h1 text-primary">Diego Castillo</span>,
+					<br />
+					Ingeniero de Sistemas y <span class="lobster h1 text-primary"
+						>Desarrollador Web</span
+					>
+				</h1>
+				<h2 class="h5">
+					Ingeniero de sistemas, especializado en desarrollo web y aplicaciones
+					a la medida
+				</h2>
+			</div>
 
-		<h2>
-			Ingeniero de sistemas, especializado en desarrollo web y aplicaciones a la
-			medida
-		</h2>
+			<div class="spheres-container">
+				<div class="sphere elect" id="ball" data-size="50"></div>
+				<!-- <div class="sphere elect"></div>
+				<div class="sphere elect"></div>
+				<div class="sphere elect"></div> -->
+				<!-- <div class="sphere nucleo"></div> -->
+			</div>
+		</section>
 
 		<p>
 			Soy Diego Castillo, ingeniero de sistemas con 5 años de experiencia en el
@@ -26,21 +43,132 @@ import Layout from "../layouts/Layout.astro";
 			frameworks como Python Django y Flask. Además, he trabajado con
 			herramientas específicas como Python QML para aplicaciones de escritorio y
 			WordPress para blogs. Actualmente, soy desarrollador web en Tagwizz, una
-			empresa de software outsourcing que colabora en proyectos a nivel
-			global.
+			empresa de software outsourcing que colabora en proyectos a nivel global.
 		</p>
 
-		<h2>
-			Servicios que Ofrezco
-		</h2>
+		<h2>Servicios que Ofrezco</h2>
 		<p>
-			Ofrezco desarrollo de aplicaciones a la medida, con un enfoque en desarrollo web como mi fuerte. Mi versatilidad me permite adaptarme a una amplia gama de tecnologías para crear soluciones específicas para cada cliente.
+			Ofrezco desarrollo de aplicaciones a la medida, con un enfoque en
+			desarrollo web como mi fuerte. Mi versatilidad me permite adaptarme a una
+			amplia gama de tecnologías para crear soluciones específicas para cada
+			cliente.
 		</p>
 
 		<h3>Servicios adicionales:</h3>
 		<ul>
-			<li>Consultoría en rendimiento web: Identifico cuellos de botella y propongo mejoras para optimizar la experiencia del usuario.</li>
-			<li>Formación en diseño de sistemas: Imparto clases y mentorías sobre patrones de diseño y arquitecturas de software a nivel universitario.</li>
+			<li>
+				Consultoría en rendimiento web: Identifico cuellos de botella y propongo
+				mejoras para optimizar la experiencia del usuario.
+			</li>
+			<li>
+				Formación en diseño de sistemas: Imparto clases y mentorías sobre
+				patrones de diseño y arquitecturas de software a nivel universitario.
+			</li>
 		</ul>
 	</main>
 </Layout>
+
+<style>
+	:root {
+		--sphere-size: 70px;
+	}
+
+	.hero-section {
+		display: flex;
+		gap: var(--spacing);
+	}
+	.hero-section .title-container,
+	.hero-section .spheres-container {
+		flex: 1 1;
+		position: relative;
+	}
+	.hero-section .spheres-container {
+		perspective: 300px;
+	}
+
+	.hero-section .spheres-container .sphere {
+		display: block;
+		background: black;
+		margin: 0;
+		border-radius: 50%;
+		height: 70px;
+		width: 70px;
+		background: radial-gradient(circle at 10px 10px, var(--primary), #000);
+		position: absolute;
+		z-index: 1;
+	}
+	.hero-section .spheres-container .sphere:nth-child(1) {
+		background: radial-gradient(circle at 10px 10px, blue, #000);
+	}
+	.hero-section .spheres-container .sphere:nth-child(2) {
+		background: radial-gradient(circle at 10px 10px, red, #000);
+	}
+	.hero-section .spheres-container .sphere:nth-child(3) {
+		background: radial-gradient(circle at 10px 10px, violet, #000);
+	}
+	.hero-section .spheres-container .sphere:nth-child(4) {
+		background: radial-gradient(circle at 10px 10px, green, #000);
+	}
+
+	.hero-section .spheres-container .sphere::before {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: radial-gradient(
+			circle at 50% 50%,
+			rgba(0, 0, 0, 0.4),
+			rgba(0, 0, 0, 0.1) 40%,
+			rgba(0, 0, 0, 0) 50%
+		);
+		-webkit-transform: rotateX(90deg) translateZ(-15px);
+		-moz-transform: rotateX(90deg) translateZ(-15px);
+		-ms-transform: rotateX(90deg) translateZ(-15px);
+		-o-transform: rotateX(90deg) translateZ(-15px);
+		transform: rotateX(90deg) translateZ(-15px);
+		z-index: -1;
+	}
+</style>
+
+<script>
+	const spheresContainer = document.querySelector(".spheres-container") as
+		| HTMLDivElement
+		| undefined;
+	const $spheres = document.querySelectorAll(
+		".sphere.elect",
+	) as NodeListOf<HTMLDivElement>;
+
+	const movs: { radiusX: number; radiusY: number; radiusZ: number; direction: string }[] = [
+		{ radiusX: 150, radiusY: 55, radiusZ: -50, direction: "horario" },
+		{ radiusX: 50, radiusY: 80, radiusZ: 30, direction: "horario" },
+		{ radiusX: 80, radiusY: 100, radiusZ: -70, direction: "L" },
+		{ radiusX: 100, radiusY: 67, radiusZ: 40, direction: "L" },
+	];
+
+	if (spheresContainer && $spheres.length !== 0) {
+		const centerX = spheresContainer.offsetWidth / 2;
+		const centerY = spheresContainer.offsetHeight / 2;
+
+		$spheres.forEach(($sphere, index) => {
+			const { radiusX, radiusY, radiusZ } = movs[index] || { radiusX: 150, radiusY: 55, radiusZ: -50, direction: "horario" };
+			
+			let angle = 0;
+
+			function animateElipse() {
+				const x = centerX + radiusX * Math.cos(angle);
+				const y = centerY + radiusY * Math.sin(angle);
+				const z = radiusZ * Math.sin(angle / 2); // Movimiento suave en Z
+
+				$sphere.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
+				$sphere.style.zIndex = `${z}`;
+
+				// Incrementar el ángulo para crear el movimiento
+				angle += 0.05;
+
+				requestAnimationFrame(animateElipse);
+			}
+
+			animateElipse();
+		});
+	}
+</script>
